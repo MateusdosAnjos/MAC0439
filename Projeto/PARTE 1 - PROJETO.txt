@@ -1,0 +1,61 @@
+PARTE 1 - PROJETO
+
+
+    NOME DO SISTEMA:
+
+        FANTASY DREAMS
+
+
+    PALAVRAS CHAVE (ajudam a definir o sistema):
+
+        Cartola, Tournament, Ultra, Sports, Social
+        Running, Competition, Friends, Points,
+        Stream, Verão, e-sports, Open, Bolão,
+        Gamble, Skins, Avatar, Emotes, Gif,
+        MSN, fantasy, diversão
+
+    INTEGRANTES DO GRUPO:
+
+        Aluno:  Mateus Agostinho dos Anjos
+        NUSP:   9298191
+
+        Aluno:  André Luiz Abdalla Silveira 
+        NUSP:   8030353
+
+        Aluno:  Henrique Cerquinho
+        NUSP:   9793700
+
+        Aluno:  André Akira Hayashi 
+        NUSP:   9293011
+
+    DESCRIÇÃO GERAL SOBRE O SISTEMA:
+
+        O sistema possuirá diferentes funcionalidades relacionadas aos
+        esportes e esportes eletrônicos.
+
+        As funcionalidades incluem criação e participação de usuários em 
+        torneios estilo fantasy (cartola), apostas em jogos, tanto eletrônicos
+        quanto não eletrônicos (valendo pontos),
+        formação de uma rede de amigos para compartilhar interesses em comum, 
+        sendo que esses interesses variam desde a prática de esportes até o 
+        acompanhamento de jogos e estatísticas, suporte a stream, para serem
+        transmitidos jogos eletrônicos, notificação de resultados das partidas,
+        avatares personalizáveis para compartilhar com os amigos durante as 
+        transmissões de partidas, entre outras funcionalidades que couberem
+        relacionadas aos esportes e a mídia social.
+
+        Este sistema envolverá o uso dos quatro tipos de banco de dados:
+
+        - Banco de dados relacional - O sistema conta com cadastro de usuários
+        que podem ser free ou premium, além das tabelas de jogos e de apostas.
+
+        - Banco de dados de documentos -  Será necessário armazenar informações
+        de jogos, como as estatísticas, imagens de momentos
+        marcantes de partidas e clips das streams.    
+
+        - Banco de dados de grafos - O sistema conta com uma espécie de rede
+        social na qual os usuários podem se relacionar (adicionando amigo,
+        compartilhando jogos e trocando mensagens)
+
+        - Banco de dados chave-valor - Deve-se gerenciar uma sessão de cada 
+        usuário, para isso podemos utilizar tal banco.
