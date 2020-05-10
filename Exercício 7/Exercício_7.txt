@@ -16,3 +16,29 @@ WHERE nomea SIMILAR TO '_% [Bb]andeira( %)*' AND
 (Agricultor.coda = Entrega.coda);
 
 --Consulta d)
+SELECT DISTINCT Restaurante.nomer FROM Produto, Entrega, Restaurante
+WHERE nomep = 'cebola' AND (Produto.codp = Entrega.codp);
+
+--Consulta e)
+SELECT DISTINCT Agricultor.coda FROM Agricultor, Produto, Entrega
+WHERE (Agricultor.coda = Entrega.coda) AND 
+(Produto.nomep = 'cebola') AND 
+(Produto.codp = Entrega.codp)
+INTERSECT
+SELECT DISTINCT Agricultor.coda FROM Agricultor, Produto, Entrega
+WHERE (Agricultor.coda = Entrega.coda) AND 
+(Produto.nomep = 'batata') AND 
+(Produto.codp = Entrega.codp);
+
+--Consulta f)
+SELECT DISTINCT Agricultor.coda FROM Agricultor, Produto, Entrega
+WHERE (Agricultor.coda = Entrega.coda) AND 
+(Produto.nomep = 'cebola') AND 
+(Produto.codp = Entrega.codp)
+EXCEPT ALL
+SELECT DISTINCT Agricultor.coda FROM Agricultor, Produto, Entrega
+WHERE (Agricultor.coda = Entrega.coda) AND 
+(Produto.nomep = 'batata') AND 
+(Produto.codp = Entrega.codp);
+
+--consulta g)
