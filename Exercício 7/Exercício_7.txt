@@ -42,3 +42,26 @@ WHERE (Agricultor.coda = Entrega.coda) AND
 (Produto.codp = Entrega.codp);
 
 --consulta g)
+SELECT DISTINCT Agricultor.coda, Produto.codp, Restaurante.codr FROM Agricultor, Produto, Restaurante, Entrega
+WHERE (Agricultor.coda = Entrega.coda) AND 
+(Produto.codp = Entrega.codp) AND 
+(Restaurante.codr = Entrega.codr) AND
+(Agricultor.cidadea != Restaurante.cidader);
+
+--consulta h)
+SELECT DISTINCT Restaurante.codr, Produto.codp FROM Produto, Restaurante
+EXCEPT ALL
+SELECT DISTINCT Restaurante.codr, Produto.codp FROM Produto, Restaurante, Entrega
+WHERE (Restaurante.codr = Entrega.codr) AND
+(Entrega.codp = Produto.codp);
+
+--consulta i)
+--A ideia aqui é listar todos os produtos e tirar
+--aqueles que nunca foram recebidos por algum Restaurante (consulta h)
+SELECT DISTINCT Produto.nomep FROM Produto
+EXCEPT ALL
+(SELECT Produto.nomep FROM Produto, Restaurante
+EXCEPT ALL
+SELECT Produto.nomep FROM Produto, Restaurante, Entrega
+WHERE (Restaurante.codr = Entrega.codr) AND
+(Entrega.codp = Produto.codp));
