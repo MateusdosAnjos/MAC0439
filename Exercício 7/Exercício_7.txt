@@ -1,0 +1,18 @@
+--Mateus Agostinho dos Anjos
+--9298191
+
+--Consulta a)
+SELECT nomea FROM Agricultor
+WHERE cidadea LIKE 'Mogi das Cruzes';
+
+--Consulta b)
+SELECT codp, nomep, precoquilo FROM Produto
+WHERE nomep SIMILAR TO '[a-e]%' OR 
+(precoquilo > 2.00 and precoquilo < 3.00);
+
+--Consulta c)
+SELECT DISTINCT codp FROM Agricultor, Entrega
+WHERE nomea SIMILAR TO '_% [Bb]andeira( %)*' AND
+(Agricultor.coda = Entrega.coda);
+
+--Consulta d)
