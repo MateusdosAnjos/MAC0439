@@ -1,0 +1,8 @@
+-- Mateus Agostinho dos Anjos
+-- NUSP: 9298191
+
+
+-- Consulta a)
+SELECT SUM(qtdequilos) FROM Restaurante, Entrega
+WHERE (Restaurante.nomer = 'RU-USP') AND
+(Restaurante.codr = Entrega.codr)
