@@ -5,4 +5,9 @@
 -- Consulta a)
 SELECT SUM(qtdequilos) FROM Restaurante, Entrega
 WHERE (Restaurante.nomer = 'RU-USP') AND
-(Restaurante.codr = Entrega.codr)
+(Restaurante.codr = Entrega.codr);
+
+-- Consulta b)
+SELECT cidadea, COUNT(cidadea) FROM Agricultor
+GROUP BY cidadea
+HAVING COUNT(cidadea) >= 2;
