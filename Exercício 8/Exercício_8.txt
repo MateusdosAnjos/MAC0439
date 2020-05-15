@@ -13,8 +13,12 @@ GROUP BY cidadea
 HAVING COUNT(cidadea) >= 2;
 
 -- Consulta c)
-SELECT codp, AVG (qtdequilos) FROM Entrega
-WHERE qtdequilos >= 20
+SELECT codp, AVG(qtdequilos) FROM Entrega
+WHERE codp IN
+	(SELECT codp FROM Entrega
+	EXCEPT
+	SELECT codp FROM Entrega
+	WHERE qtdequilos < 20)
 GROUP BY codp;
 
 -- Consulta d)
