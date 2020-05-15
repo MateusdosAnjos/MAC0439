@@ -11,3 +11,8 @@ WHERE (Restaurante.nomer = 'RU-USP') AND
 SELECT cidadea, COUNT(cidadea) FROM Agricultor
 GROUP BY cidadea
 HAVING COUNT(cidadea) >= 2;
+
+-- Consulta c)
+SELECT codp, AVG (qtdequilos) FROM Entrega
+WHERE qtdequilos >= 20
+GROUP BY codp;
