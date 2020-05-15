@@ -26,3 +26,9 @@ SELECT nomep, SUM (qtdequilos) AS quilosVendidos FROM Produto, Entrega
 WHERE Produto.codp = Entrega.codp
 GROUP BY (nomep) ORDER BY (SUM(qtdequilos)) DESC
 LIMIT 1;
+
+-- Consulta e)
+SELECT Restaurante.nomer FROM Restaurante, Entrega
+WHERE Restaurante.codr = Entrega.codr AND
+(dataentrega IN 
+	(SELECT max(dataentrega) FROM Entrega));
