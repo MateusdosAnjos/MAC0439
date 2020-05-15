@@ -16,3 +16,8 @@ HAVING COUNT(cidadea) >= 2;
 SELECT codp, AVG (qtdequilos) FROM Entrega
 WHERE qtdequilos >= 20
 GROUP BY codp;
+
+-- Consulta d)
+SELECT nomep, SUM (qtdequilos) AS quilosVendidos FROM Produto, Entrega
+WHERE Produto.codp = Entrega.codp
+GROUP BY (nomep) ORDER BY (SUM(qtdequilos)) DESC;
