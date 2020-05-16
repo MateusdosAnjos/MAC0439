@@ -32,3 +32,12 @@ SELECT Restaurante.nomer FROM Restaurante, Entrega
 WHERE Restaurante.codr = Entrega.codr AND
 (dataentrega IN 
 	(SELECT max(dataentrega) FROM Entrega));
+
+-- Consulta f)
+SELECT DISTINCT Produto.nomep FROM Produto
+EXCEPT ALL
+(SELECT Produto.nomep FROM Produto, Restaurante
+EXCEPT ALL
+SELECT Produto.nomep FROM Produto, Restaurante, Entrega
+WHERE (Restaurante.codr = Entrega.codr) AND
+(Entrega.codp = Produto.codp));
