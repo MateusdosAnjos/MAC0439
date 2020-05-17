@@ -60,12 +60,14 @@ SELECT nomep, SUM(qtdequilos) AS total_kilos FROM Produto
 LEFT OUTER JOIN Entrega ON Produto.codp = Entrega.codp
 GROUP BY nomep ORDER BY  total_kilos DESC NULLS LAST;
 
--- Consulta i) NÃO COMPLETA!
-SELECT DISTINCT pro.nomep, Opa.nomea
-    FROM (
-        SELECT DISTINCT Produto.nomep, Produto.codp, Agricultor.nomea
-        FROM Agricultor, Produto, Entrega
-		WHERE Produto.codp = Entrega.codp AND Agricultor.coda = Entrega.coda
-		ORDER BY nomea
-    ) AS Opa
-    FULL OUTER JOIN Produto AS pro ON Opa.codp = pro.codp ORDER BY Opa.nomea;
+-- Consulta i)
+SELECT DISTINCT table2.nomep, table1.nomea
+	FROM (
+        SELECT DISTINCT Agricultor.coda, Agricultor.nomea, Entrega.codp
+        FROM Agricultor LEFT JOIN Entrega ON Agricultor.coda = Entrega.coda
+		) AS table1
+		FULL OUTER JOIN (
+			SELECT DISTINCT Produto.codp, Produto.nomep, Entrega.coda
+			FROM Produto LEFT JOIN Entrega ON Produto.codp = Entrega.codp
+		) AS table2 ON table1.coda = table2.coda ORDER BY nomea;
+
