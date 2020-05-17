@@ -33,6 +33,13 @@ WHERE Restaurante.codr = Entrega.codr AND
 (dataentrega IN 
 	(SELECT max(dataentrega) FROM Entrega));
 
+-- Consulta e) Utilizando o NATURAL JOIN
+SELECT nomer FROM Restaurante
+NATURAL JOIN Entrega 
+WHERE dataentrega = (
+			SELECT max(dataentrega) FROM Entrega
+    	);
+
 -- Consulta f)
 SELECT DISTINCT Produto.nomep FROM Produto
 EXCEPT ALL
@@ -56,9 +63,10 @@ GROUP BY nomep ORDER BY  total_kilos DESC NULLS LAST;
 -- Consulta i) NÃO COMPLETA!
 SELECT DISTINCT pro.nomep, Opa.nomea
     FROM (
-        SELECT Produto.nomep, Agricultor.nomea, Entrega.codp
-        FROM Agricultor, Produto, Entrega
-        WHERE Agricultor.coda = Entrega.coda AND Produto.codp = Entrega.codp
+        SELECT DISTINCT Produto.nomep, Agricultor.nomea, Entrega.codp
+        FROM Agricultor, Produto
+		FULL OUTER JOIN Entrega ON coda = Entrega.coda AND Produto.codp = Entrega.codp
+		ORDER BY nomea
     ) AS Opa
     FULL OUTER JOIN Produto AS pro ON Opa.codp = pro.codp ORDER BY Opa.nomea;
 
