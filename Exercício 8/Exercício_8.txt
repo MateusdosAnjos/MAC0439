@@ -47,3 +47,8 @@ SELECT Entrega.coda, Entrega.codp, Entrega.codr FROM Entrega
 JOIN Restaurante ON  Entrega.codr = Restaurante.codr
 JOIN Agricultor ON Agricultor.coda = Entrega.coda
 WHERE Agricultor.cidadea != Restaurante.cidader;
+
+-- Consulta h)
+SELECT nomep, SUM(qtdequilos) AS total_kilos FROM Produto 
+LEFT OUTER JOIN Entrega ON Produto.codp = Entrega.codp
+GROUP BY nomep ORDER BY  total_kilos DESC NULLS LAST;
