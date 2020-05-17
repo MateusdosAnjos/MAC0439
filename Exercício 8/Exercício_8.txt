@@ -63,10 +63,9 @@ GROUP BY nomep ORDER BY  total_kilos DESC NULLS LAST;
 -- Consulta i) NÃO COMPLETA!
 SELECT DISTINCT pro.nomep, Opa.nomea
     FROM (
-        SELECT DISTINCT Produto.nomep, Agricultor.nomea, Entrega.codp
-        FROM Agricultor, Produto
-		FULL OUTER JOIN Entrega ON coda = Entrega.coda AND Produto.codp = Entrega.codp
+        SELECT DISTINCT Produto.nomep, Produto.codp, Agricultor.nomea
+        FROM Agricultor, Produto, Entrega
+		WHERE Produto.codp = Entrega.codp AND Agricultor.coda = Entrega.coda
 		ORDER BY nomea
     ) AS Opa
     FULL OUTER JOIN Produto AS pro ON Opa.codp = pro.codp ORDER BY Opa.nomea;
-
