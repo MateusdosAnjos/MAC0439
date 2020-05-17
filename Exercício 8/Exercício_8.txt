@@ -63,11 +63,11 @@ GROUP BY nomep ORDER BY  total_kilos DESC NULLS LAST;
 -- Consulta i)
 SELECT DISTINCT table2.nomep, table1.nomea
 	FROM (
-        SELECT DISTINCT Agricultor.coda, Agricultor.nomea, Entrega.codp
+        SELECT Agricultor.coda, Agricultor.nomea, Entrega.codp
         FROM Agricultor LEFT JOIN Entrega ON Agricultor.coda = Entrega.coda
 		) AS table1
 		FULL OUTER JOIN (
-			SELECT DISTINCT Produto.codp, Produto.nomep, Entrega.coda
+			SELECT Produto.codp, Produto.nomep, Entrega.coda
 			FROM Produto LEFT JOIN Entrega ON Produto.codp = Entrega.codp
 		) AS table2 ON table1.coda = table2.coda ORDER BY nomea;
 
