@@ -52,3 +52,13 @@ WHERE Agricultor.cidadea != Restaurante.cidader;
 SELECT nomep, SUM(qtdequilos) AS total_kilos FROM Produto 
 LEFT OUTER JOIN Entrega ON Produto.codp = Entrega.codp
 GROUP BY nomep ORDER BY  total_kilos DESC NULLS LAST;
+
+-- Consulta i) NÃO COMPLETA!
+SELECT DISTINCT pro.nomep, Opa.nomea
+    FROM (
+        SELECT Produto.nomep, Agricultor.nomea, Entrega.codp
+        FROM Agricultor, Produto, Entrega
+        WHERE Agricultor.coda = Entrega.coda AND Produto.codp = Entrega.codp
+    ) AS Opa
+    FULL OUTER JOIN Produto AS pro ON Opa.codp = pro.codp ORDER BY Opa.nomea;
+
