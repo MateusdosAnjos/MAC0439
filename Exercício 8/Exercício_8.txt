@@ -41,3 +41,9 @@ EXCEPT ALL
 SELECT Produto.nomep FROM Produto, Restaurante, Entrega
 WHERE (Restaurante.codr = Entrega.codr) AND
 (Entrega.codp = Produto.codp));
+
+-- Consulta g)
+SELECT Entrega.coda, Entrega.codp, Entrega.codr FROM Entrega
+JOIN Restaurante ON  Entrega.codr = Restaurante.codr
+JOIN Agricultor ON Agricultor.coda = Entrega.coda
+WHERE Agricultor.cidadea != Restaurante.cidader;
