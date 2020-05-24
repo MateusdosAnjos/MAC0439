@@ -1,0 +1,23 @@
+Consulta a)
+
+{
+ filter: {
+  $and: [
+   {
+    preco: {
+     $gte: 200,
+     $lte: 300
+    }
+   },
+   {
+    tipo: 'impressora'
+   }
+  ]
+ },
+ project: {
+  _id: 0,
+  modelo: 1,
+  tipo: 1,
+  preco: 1
+ }
+}
