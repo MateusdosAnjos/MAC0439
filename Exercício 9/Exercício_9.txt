@@ -1,23 +1,13 @@
 Consulta a)
 
-{
- filter: {
-  $and: [
-   {
-    preco: {
-     $gte: 200,
-     $lte: 300
-    }
-   },
-   {
-    tipo: 'impressora'
-   }
-  ]
- },
- project: {
-  _id: 0,
-  modelo: 1,
-  tipo: 1,
-  preco: 1
- }
-}
+db.equipamentos.find({
+    filter: {$and: [{preco: {$gte: 200, $lte: 300}}, {tipo: 'impressora'}]},
+    project: {_id: 0, modelo: 1, tipo: 1, preco: 1}
+})
+
+Consulta b)
+
+db.equipamentos.find(({
+    filter: {$or: [{tipo: 'impressora'}, {tipo: 'pc'}]},
+    project: {_id: 0, fabricante: 1}
+})
