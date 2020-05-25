@@ -7,7 +7,15 @@ db.equipamentos.find({
 
 Consulta b)
 
-db.equipamentos.find(({
+db.equipamentos.find({
     filter: {$or: [{tipo: 'impressora'}, {tipo: 'pc'}]},
     project: {_id: 0, fabricante: 1}
+})
+
+Consulta c)
+
+db.equipamentos.find({
+    filter: {$and: [{$or: [{cd: '6x'}, {cd: '8x'}]}, {preco: {$lte: 2000}}]},
+    project: {modelo: 1, velocidade: 1, hd: 1},
+    sort: {velocidade: -1, tamanho: -1}
 })
