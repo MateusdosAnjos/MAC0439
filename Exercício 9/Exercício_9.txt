@@ -19,3 +19,18 @@ db.equipamentos.find({
     project: {modelo: 1, velocidade: 1, hd: 1},
     sort: {velocidade: -1, tamanho: -1}
 })
+
+Consulta d)
+
+db.equipamentos.find({
+    filter: {fabricante: {$regex: '^[a, b, c, d, e]+', $options: 'i'}},
+    project: {modelo: 1},
+    sort: {fabricante: 1}
+})
+
+db.fabricantes.find({
+    filter: {fabricante: {$regex: '^[a, b, c, d, e]+', $options: 'i'}},
+    project: {'equipamentos.modelo': 1},
+    sort: {fabricante: 1}
+})
+
