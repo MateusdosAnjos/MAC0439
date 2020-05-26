@@ -1,36 +1,36 @@
-Consulta a)
+//NOME: Mateus Agostinho dos Anjos
+//NUSP: 9298191
+
+//Consulta a)
 
 db.equipamentos.find(
     {$and: [{preco: {$gte: 200, $lte: 300}}, {tipo: 'impressora'}]}, 
     {_id: 0, modelo: 1, tipo: 1, preco: 1}
 )
 
-Consulta b)
+//Consulta b)
 
 db.equipamentos.find(
     {$or: [{tipo: 'impressora'}, {tipo: 'pc'}]},
     {_id: 0, fabricante: 1}
 )
 
-Consulta c)
+//Consulta c)
 
 db.equipamentos.find(
     {$and: [{$or: [{cd: '6x'}, {cd: '8x'}]}, {preco: {$lte: 2000}}]},
     {modelo: 1, velocidade: 1, hd: 1},
-    {velocidade: -1, tamanho: -1}
-)
+).sort({velocidade: -1, tamanho: -1})
 
-Consulta d)
+//Consulta d)
 
 db.equipamentos.find(
     {fabricante: {$regex: '^[a, b, c, d, e]+', $options: 'i'}},
     {modelo: 1},
-    {fabricante: 1}
-)
+).sort({fabricante: 1})
 
 db.fabricantes.find(
     {fabricante: {$regex: '^[a, b, c, d, e]+', $options: 'i'}},
     {'equipamentos.modelo': 1},
-    {fabricante: 1}
-)
+).sort({fabricante: 1})
 
