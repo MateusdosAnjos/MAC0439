@@ -47,3 +47,17 @@ db.fabricantes.distinct(
     {fabricante: {$regex: '[a-z0-9]+ [a-z0-9]+ [a-z0-9]+[ a-z0-9 ]*', $options: 'i'}},
     {_id: 0, "equipamentos.tipo": 1},
 );
+
+//Consulta f)
+
+db.equipamentos.distinct(
+    "tipo",
+    {fabricante: {$regex: '^[a-z0-9]+ [a-z0-9]+$', $options: 'i'}},
+    {_id: 0, fabricante: 1, tipo: 1},
+);
+
+db.fabricantes.distinct(
+    "equipamentos.tipo",
+    {fabricante: {$regex: '^[a-z0-9]+ [a-z0-9]+$', $options: 'i'}},
+    {_id: 0, "equipamentos.tipo": 1},
+);
