@@ -61,3 +61,13 @@ db.fabricantes.distinct(
     {fabricante: {$regex: '^[a-z0-9]+ [a-z0-9]+$', $options: 'i'}},
     {_id: 0, "equipamentos.tipo": 1},
 );
+
+//Consulta g)
+//Existem impressoras que nao possuem o campo "tipo_impressao", portanto
+//as considerei como não coloridas
+
+db.equipamentos.find(
+    {$and: [{tipo: 'impressora', colorida: 1, tipo_impressao: {$ne: 'ink-jet'}}]},
+    {_id: 0, fabricante: 1, modelo: 1}
+);
+
