@@ -71,3 +71,15 @@ db.equipamentos.find(
     {_id: 0, fabricante: 1, modelo: 1}
 );
 
+//Consulta h)
+
+db.equipamentos.find(
+    {},
+    {_id: 0, fabricante: 1, modelo: 1, preco: 1}
+);
+
+db.fabricantes.find(
+    {},
+    {_id: 0, fabricante: 1, 'equipamentos.modelo': 1, 'equipamentos.preco': 1}
+);
+
