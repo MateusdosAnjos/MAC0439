@@ -83,3 +83,30 @@ db.fabricantes.find(
     {_id: 0, fabricante: 1, 'equipamentos.modelo': 1, 'equipamentos.preco': 1}
 );
 
+// Para as consultas i) e j) pensei em criar subqueries como coleções e usar
+//o comando lookup, porém não consegui fazer funcionar desta forma.
+//Para a consulta i) acho que poderia ser feito uma busca nos elementos
+//do array pelos tipos impressora e pc, mas não consegui fazer funcionar
+//utilizando essa abordagem.
+//Abaixo está a tentativa do uso do lookup
+
+
+db.equipamentos.find(
+    {tipo: "impressora"},
+    {_id: 0}
+);//AS "so_impressoras"
+
+db.equipamentos.find(
+    {tipo: "pc"},
+    {_id: 0},
+);//AS "so_pcs"
+
+db.so_pcs.aggregate({
+    $lookup:
+      {
+        from: "so_impressoras",
+        localField: "fabricante",
+        foreignField: "fabricante",
+        as: "vendedores"
+      }
+ });
