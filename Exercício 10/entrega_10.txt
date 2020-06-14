@@ -3,6 +3,6 @@
 
 
 //Consulta a)
-MATCH (person:Person)-[:ACTED_IN]->(movie:Movie)
-WITH DISTINCT person.name AS Ator, movie.released AS anos_das_atuacoes
+MATCH (pessoa:Person)-[:ACTED_IN]->(filme:Movie)
+WITH DISTINCT pessoa.name AS Ator, filme.released AS anos_das_atuacoes
 RETURN Ator, min(anos_das_atuacoes) AS Estreia ORDER BY Estreia
