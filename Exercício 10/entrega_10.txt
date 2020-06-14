@@ -6,3 +6,8 @@
 MATCH (pessoa:Person)-[:ACTED_IN]->(filme:Movie)
 WITH DISTINCT pessoa.name AS Ator, filme.released AS anos_das_atuacoes
 RETURN Ator, min(anos_das_atuacoes) AS Estreia ORDER BY Estreia
+
+//Consulta b)
+MATCH (ator:Person)-[:ACTED_IN]->(filme:Movie)<-[:ACTED_IN]-(conhecidos:Person)
+WITH ator.name AS nome_ator, collect(DISTINCT conhecidos.name) AS conhecidos_distintos
+RETURN nome_ator AS Nome_Ator, conhecidos_distintos AS Lista_de_Conhecidos
