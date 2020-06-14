@@ -23,4 +23,10 @@ MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(filme:Movie),(filme)<-[:ACTE
 WITH recomendacao_1.name AS Name, COUNT (*) AS Atuacoes
 WHERE Atuacoes > 1
 RETURN Name
-ORDER BY Atuacoes DESC;
+ORDER BY Atuacoes DESC
+UNION ALL
+MATCH (recomendacao_2:Person)-[:ACTED_IN]->(filmes:Movie)
+WITH recomendacao_2.name AS Name, COUNT (*) AS Atuacoes
+WHERE NOT (Name = "Tom Hanks") AND Atuacoes > 3
+RETURN Name
+ORDER BY Atuacoes DESC
