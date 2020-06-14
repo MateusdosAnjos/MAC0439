@@ -1,0 +1,8 @@
+// Nome:   Mateus Agostinho dos Anjos
+// NUSP:   9298191
+
+
+//Consulta a)
+MATCH (person:Person)-[:ACTED_IN]->(movie:Movie)
+WITH DISTINCT person.name AS Ator, movie.released AS anos_das_atuacoes
+RETURN Ator, min(anos_das_atuacoes) AS Estreia ORDER BY Estreia
