@@ -13,7 +13,7 @@ WITH ator.name AS nome_ator, collect(DISTINCT conhecidos.name) AS conhecidos_dis
 RETURN nome_ator AS Nome_Ator, conhecidos_distintos AS Lista_de_Conhecidos
 
 //Consulta c)
-MATCH (diretor:Person)-[:DIRECTED]->(filme_ini:Movie), (diretor:Person)-[:DIRECTED]->(filme_sequencia:Movie), (diretor:Person)-[:ACTED_IN]->(filme_intermediario:Movie)
+MATCH (diretor:Person)-[:DIRECTED]->(filme_ini:Movie), (diretor:Person)-[:DIRECTED]->(filme_sequencia:Movie), (diretor:Person)-[:ACTED_IN | :DIRECTED]->(filme_intermediario:Movie)
 WHERE (filme_ini.released < filme_sequencia.released) AND NOT ((filme_ini.released < filme_intermediario.released) AND (filme_intermediario.released < filme_sequencia.released))
 WITH DISTINCT diretor.name AS Diretor
 RETURN Diretor
