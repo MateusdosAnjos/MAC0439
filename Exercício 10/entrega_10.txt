@@ -5,15 +5,22 @@
 //Consulta a)
 MATCH (pessoa:Person)-[:ACTED_IN]->(filme:Movie)
 WITH DISTINCT pessoa.name AS Ator, filme.released AS anos_das_atuacoes
-RETURN Ator, min(anos_das_atuacoes) AS Estreia ORDER BY Estreia
+RETURN Ator, min(anos_das_atuacoes) AS Estreia ORDER BY Estreia;
 
 //Consulta b)
 MATCH (ator:Person)-[:ACTED_IN]->(filme:Movie)<-[:ACTED_IN]-(conhecidos:Person)
 WITH ator.name AS nome_ator, collect(DISTINCT conhecidos.name) AS conhecidos_distintos
-RETURN nome_ator AS Nome_Ator, conhecidos_distintos AS Lista_de_Conhecidos
+RETURN nome_ator AS Nome_Ator, conhecidos_distintos AS Lista_de_Conhecidos;
 
 //Consulta c)
 MATCH (diretor:Person)-[:DIRECTED]->(filme_ini:Movie), (diretor:Person)-[:DIRECTED]->(filme_sequencia:Movie), (diretor:Person)-[:ACTED_IN | :DIRECTED]->(filme_intermediario:Movie)
 WHERE (filme_ini.released < filme_sequencia.released) AND NOT ((filme_ini.released < filme_intermediario.released) AND (filme_intermediario.released < filme_sequencia.released))
 WITH DISTINCT diretor.name AS Diretor
-RETURN Diretor
+RETURN Diretor;
+
+//Consulta d)
+MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(movie:Movie),(movie)<-[:ACTED_IN]-(actor:Person)
+WITH actor.name AS Name, COUNT (*) AS Atuacoes
+WHERE Atuacoes > 1
+RETURN Name
+ORDER BY Atuacoes DESC;
