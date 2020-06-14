@@ -18,7 +18,7 @@ WHERE (filme_ini.released < filme_sequencia.released) AND NOT ((filme_ini.releas
 WITH DISTINCT diretor.name AS Diretor
 RETURN Diretor;
 
-//Consulta d)
+//Consulta d) Achei que uma boa recomendação poderia ser: Atores que já atuaram com o Tom Hanks em mais de 1 filme ou atores que já atuaram diversas vezes em filmes (diversas significa mais que 3 vezes, para termos uma listinha de um tamanhho bom).
 MATCH (tom:Person {name:"Tom Hanks"})-[:ACTED_IN]->(filme:Movie),(filme)<-[:ACTED_IN]-(recomendacao_1:Person)
 WITH recomendacao_1.name AS Name, COUNT (*) AS Atuacoes
 WHERE Atuacoes > 1
@@ -29,4 +29,4 @@ MATCH (recomendacao_2:Person)-[:ACTED_IN]->(filmes:Movie)
 WITH recomendacao_2.name AS Name, COUNT (*) AS Atuacoes
 WHERE NOT (Name = "Tom Hanks") AND Atuacoes > 3
 RETURN Name
-ORDER BY Atuacoes DESC
+ORDER BY Atuacoes DESC;
