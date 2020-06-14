@@ -30,3 +30,11 @@ WITH recomendacao_2.name AS Name, COUNT (*) AS Atuacoes
 WHERE NOT (Name = "Tom Hanks") AND Atuacoes > 3
 RETURN Name
 ORDER BY Atuacoes DESC;
+
+//Consulta e) As recomendações são compostas dos atores que mais atuaram em filmes, portanto devem ser bons, e que nunca trabalharam com o Jack Nicholson.
+MATCH (recomendacao:Person)-[:ACTED_IN]->(filmes:Movie)
+WHERE NOT ((:Person {name:"Jack Nicholson"})-[:ACTED_IN]->(filmes))
+WITH recomendacao.name AS Name, COUNT (*) AS Atuacoes
+WHERE Atuacoes > 3
+RETURN Name
+ORDER BY Atuacoes DESC;
