@@ -1,0 +1,26 @@
+-- Nome:   Mateus Agostinho dos Anjos
+-- NUSP:   9298191
+
+-- funcao a)
+CREATE OR REPLACE FUNCTION public.exercicio_a(preco_passado REAL)
+RETURNS INTEGER AS $$
+
+DECLARE 
+	possivel_modelo INT := 1;
+	preco_dif REAL := 900000; -- Aqui seria ideal usar +INF
+	preco_atual REAL;
+	pc_atual_preco REAL;
+	pc_atual_modelo INT;
+	pc_modelo_mais_proximo INT;
+
+BEGIN
+	FOR pc_atual_preco, pc_atual_modelo IN SELECT preco, modelo FROM PC
+	LOOP
+		IF abs(preco_passado - pc_atual_preco) < preco_dif THEN
+			preco_dif = abs(preco_passado - pc_atual_preco);
+			pc_modelo_mais_proximo = pc_atual_modelo;
+		END IF;
+	END LOOP;
+	RETURN pc_modelo_mais_proximo;
+END;$$
+LANGUAGE plpgsql;
