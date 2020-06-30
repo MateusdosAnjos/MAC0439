@@ -24,3 +24,36 @@ BEGIN
 	RETURN pc_modelo_mais_proximo;
 END;$$
 LANGUAGE plpgsql;
+
+
+-- funcao b)
+CREATE OR REPLACE FUNCTION public.exercicio_b(fabricante_param CHAR, modelo INT)
+RETURNS NUMERIC(6, 2) AS $$
+
+DECLARE 
+	
+	fabricante_loop CHAR(2);
+	modelo_loop INT;
+	preco_loop NUMERIC(6, 2);
+	preco_resp NUMERIC(6, 2) := NULL;
+
+BEGIN
+	FOR fabricante_loop, modelo_loop, preco_loop IN 
+		(
+			SELECT Produto.fabricante, PC.modelo, PC.preco FROM Produto, PC
+			WHERE Produto.modelo = PC.modelo AND Produto.fabricante = fabricante_param
+			UNION
+			SELECT Produto.fabricante, Laptop.modelo, Laptop.preco FROM Produto, Laptop
+			WHERE Produto.modelo = Laptop.modelo AND Produto.fabricante = fabricante_param
+			UNION
+			SELECT Produto.fabricante, Impressora.modelo, Impressora.preco FROM Produto, Impressora
+			WHERE Produto.modelo = Impressora.modelo AND Produto.fabricante = fabricante_param
+		)
+	LOOP
+		IF modelo_loop = modelo THEN
+			preco_resp = preco_loop;
+		END IF;
+	END LOOP;
+	RETURN preco_resp;
+END;$$
+LANGUAGE plpgsql;
