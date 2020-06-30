@@ -1,6 +1,8 @@
 -- Nome:   Mateus Agostinho dos Anjos
 -- NUSP:   9298191
 
+--------------------------------------------------------------------------------
+
 -- funcao a)
 CREATE OR REPLACE FUNCTION public.exercicio_a(preco_passado REAL)
 RETURNS INTEGER AS $$
@@ -25,6 +27,7 @@ BEGIN
 END;$$
 LANGUAGE plpgsql;
 
+--------------------------------------------------------------------------------
 
 -- funcao b)
 CREATE OR REPLACE FUNCTION public.exercicio_b(fabricante_param CHAR, modelo INT)
@@ -57,3 +60,22 @@ BEGIN
 	RETURN preco_resp;
 END;$$
 LANGUAGE plpgsql;
+
+--------------------------------------------------------------------------------
+
+-- funcao c)
+CREATE OR REPLACE FUNCTION exercicio_c(modelo INT, fabricante CHAR, velocidade INT, tam_RAM INT, tam_HD DOUBLE PRECISION)
+RETURNS VOID AS $$
+
+BEGIN
+	BEGIN
+		INSERT INTO PC VALUES (modelo, velocidade, tam_RAM, tam_HD);
+		EXCEPTION WHEN SQLSTATE '23000' THEN
+		BEGIN
+			RAISE NOTICE 'MODELO DE PC JÁ EXISTENTE!';
+			RETURN;
+		END;
+	END;
+	RAISE NOTICE 'PC INSERIDO COM SUCESSO!';
+END;
+$$ LANGUAGE plpgsql;
