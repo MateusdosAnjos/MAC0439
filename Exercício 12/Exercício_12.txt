@@ -4,8 +4,9 @@
 --------------------------------------------------------------------------------
 
 -- funcao a)
-CREATE OR REPLACE FUNCTION public.exercicio_a(preco_passado REAL)
-RETURNS INTEGER AS $$
+CREATE OR REPLACE FUNCTION public.exercicio_a(
+	preco_passado REAL
+) RETURNS INTEGER AS $$
 
 DECLARE 
 	possivel_modelo INT := 1;
@@ -30,11 +31,11 @@ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 
 -- funcao b)
-CREATE OR REPLACE FUNCTION public.exercicio_b(fabricante_param CHAR, modelo INT)
-RETURNS NUMERIC(6, 2) AS $$
+CREATE OR REPLACE FUNCTION public.exercicio_b(
+	fabricante_param CHAR, modelo INT
+) RETURNS NUMERIC(6, 2) AS $$
 
 DECLARE 
-	
 	fabricante_loop CHAR(2);
 	modelo_loop INT;
 	preco_loop NUMERIC(6, 2);
@@ -64,18 +65,30 @@ LANGUAGE plpgsql;
 --------------------------------------------------------------------------------
 
 -- funcao c)
-CREATE OR REPLACE FUNCTION exercicio_c(modelo INT, fabricante CHAR, velocidade INT, tam_RAM INT, tam_HD DOUBLE PRECISION)
-RETURNS VOID AS $$
+CREATE OR REPLACE FUNCTION exercicio_c(
+	modelo INT, 
+	fabricante CHAR, 
+	velocidade INT, 
+	tam_RAM INT, 
+	tam_HD DOUBLE PRECISION
+) RETURNS VOID AS $$
+
+DECLARE
+	modelo_novo_pc INT := modelo;
 
 BEGIN
-	BEGIN
-		INSERT INTO PC VALUES (modelo, velocidade, tam_RAM, tam_HD);
-		EXCEPTION WHEN SQLSTATE '23000' THEN
+	LOOP
 		BEGIN
-			RAISE NOTICE 'MODELO DE PC JÁ EXISTENTE!';
+			INSERT INTO PRODUTO VALUES (fabricante, modelo_novo_pc, 'pc');
+			INSERT INTO PC VALUES (modelo_novo_pc, velocidade, tam_RAM, tam_HD);
+			RAISE NOTICE 'PC DE MODELO: % INSERIDO COM SUCESSO!', modelo_novo_pc;
 			RETURN;
+			EXCEPTION WHEN SQLSTATE '23000' THEN
+				BEGIN
+					modelo_novo_pc = modelo_novo_pc + 1;
+					RAISE NOTICE 'MODELO DE PC JÁ EXISTENTE!';
+				END;
 		END;
-	END;
-	RAISE NOTICE 'PC INSERIDO COM SUCESSO!';
+	END LOOP;
 END;
 $$ LANGUAGE plpgsql;
