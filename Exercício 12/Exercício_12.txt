@@ -2,6 +2,9 @@
 -- NUSP:   9298191
 
 --------------------------------------------------------------------------------
+--Utilizei o pgAdmin hosteado no IME (aquele que foi disponibilizado para o
+--exercicio 7) para fazer esta lista 12
+--------------------------------------------------------------------------------
 
 -- funcao a)
 CREATE OR REPLACE FUNCTION public.exercicio_a(
@@ -92,3 +95,36 @@ BEGIN
 	END LOOP;
 END;
 $$ LANGUAGE plpgsql;
+
+--------------------------------------------------------------------------------
+
+-- funcao d)
+CREATE TYPE resposta AS (num_produtos_mais_caros_que BIGINT, tipo_produto CHAR(20));
+
+CREATE OR REPLACE FUNCTION exercicio_d(
+	preco_dado INT
+) RETURNS SETOF resposta AS $$
+	
+BEGIN
+	RETURN QUERY
+		(SELECT COUNT(*), PRODUTO.tipo FROM PC, PRODUTO
+		WHERE PRODUTO.modelo = PC.modelo AND preco > preco_dado
+		GROUP BY (PRODUTO.tipo)
+		UNION
+		SELECT COUNT(*), PRODUTO.tipo FROM LAPTOP, PRODUTO
+		WHERE PRODUTO.modelo = LAPTOP.modelo AND preco > preco_dado
+		GROUP BY (PRODUTO.tipo))
+		UNION
+		SELECT COUNT(*), PRODUTO.tipo FROM IMPRESSORA, PRODUTO
+		WHERE PRODUTO.modelo = IMPRESSORA.modelo AND preco > preco_dado
+		GROUP BY (PRODUTO.tipo);
+		EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                RETURN QUERY SELECT NULLIF (1, 1);
+END;
+$$ LANGUAGE plpgsql;
+
+--A parte do "EXCEPION WHEN NO_DATA_FOUND" foi uma tentativa de colocar 0 (zero)
+--nas consultas cujo resultado do COUNT era vazio. Não funcionou como o esperado
+--mas deixei escrito como forma de registro da tentativa. Entretanto, a saída
+--está bem visual e a falta do 0 não prejudicou muito o resultado do exercício
