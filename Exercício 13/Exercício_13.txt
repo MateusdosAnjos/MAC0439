@@ -5,7 +5,7 @@ NUSP:   9298191
 
 Para a função F1 e Trigger T1:
 
-    O trigger (T1) é disparado antes de uma inserção em ItemPedido, ou 
+    O trigger T1 é disparado antes de uma inserção em ItemPedido, ou 
     seja, antes de inserir uma tupla em ItemPedido a função F1 será executada.
     Esta função faz o update do estoque de livros da loja da seguinte forma:
     - Irá percorrer cada tupla verificando se é o livro da tupla a ser inserida
@@ -14,6 +14,13 @@ Para a função F1 e Trigger T1:
     - Caso contrário o estoque da loja será atualizado e a tupla será inserida.
 
 Para a função F2:
+
+    O trigger T2 é disparado antes de qualquer atualização na quantidade de 
+    livros de um ItemPedido, para cada linha de ItemPedido é executada a 
+    função F2.
+    Esta função faz o update da quatidade de livros em ItemPedido da seguinte
+    forma:
+    
 
 Para a função F3:
 
