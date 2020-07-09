@@ -9,7 +9,7 @@ Para a função F1 e Trigger T1:
     seja, antes de inserir uma tupla em ItemPedido a função F1 será executada.
     Esta função faz o update do estoque de livros da loja da seguinte forma:
     - Irá percorrer cada tupla verificando se é o livro da tupla a ser inserida
-    - Caso o pedido já tenh sido pago ou não haja estoque do livro em questão
+    - Caso o pedido já tenha sido pago ou não haja estoque do livro em questão
       na loja, a tupla não será inserida.
     - Caso contrário o estoque da loja será atualizado e a tupla será inserida.
 
@@ -20,7 +20,26 @@ Para a função F2:
     função F2.
     Esta função faz o update da quatidade de livros em ItemPedido da seguinte
     forma:
-    
+    - Armazena em 'q' a quantidade em estoque do livro em questão
+    - Caso o boleto do pedido em questão já esteja pago OU a nova quantidade
+      desejada de livros seja maior que a antiga porém o estoque tenha acabado
+      (Ex: o pedido tinha 2 livros 'A' e deseja-se comprar +3 livros 'A', 
+      ficando com 5 livros 'A', porém não tem livro 'A' em estoque)
+      a função não fará a atualização da nova quantidade (abortará o 'update'
+      devolvendo null)
+    - Caso a atualização passe das verificações anteriores, a função checará
+      se há estoque suficiente para atender ao pedido. Se não houver estoque
+      suficiente a função irá atualizar o pedido adicionando todo o estoque
+      disponível. Ex. O pedido tinha 2 livros 'A' e deseja-se comprar +3 livros 
+      'A', ficando com 5 livros 'A', porém só existe mais 1 livro 'A' em 
+      estoque, então o pedido será atualizado para 3 livros 'A'.
+    - Por fim o estoque do livro em questão será atualizado pela função.
+
+  Obs: O termo 'livro em questão' refere-se ao livro cuja quantidade se pretende
+  modificar e 'pedido em questão' refere-se ao pedido que contém o livro cuja
+  quantidade pretende-se modificar.
+
+
 
 Para a função F3:
 
