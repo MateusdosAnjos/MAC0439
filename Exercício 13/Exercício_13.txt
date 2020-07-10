@@ -70,9 +70,12 @@ Para a função F4:
       valor, na verdade, será uma subtração)
 
 
-Após entendermos o que cada trigger faz individualmente notamos que este 
-conjunto de ações serve para gerenciar o "carrinho de compras" de um cliente
-ao fazer pedidos online nesta loja, pois notamos que há o gerenciamento de 
-estoque, atualização de preços, verificação se o boleto já foi pago e outras 
-funcionalidades típicas do momento em que o cliente está preparando sua compra.
+Conclusão acerca de todo o processo:
+
+  Após entendermos o que cada trigger faz individualmente notamos que este 
+  conjunto de ações serve para gerenciar o "carrinho de compras" de um cliente
+  ao fazer pedidos online nesta loja, pois notamos que há o gerenciamento de 
+  estoque, atualização de preços, verificação se o boleto já foi pago e outras 
+  funcionalidades típicas do momento em que o cliente está preparando sua 
+  compra.
 
