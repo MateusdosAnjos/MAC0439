@@ -53,4 +53,20 @@ Para a função F3:
 
 Para a função F4:
 
-    
+    O trigger T4 é disparado após uma atualização da quantidade em um 
+    ItemPedido, para cada linha de ItemPedido é executada a função F4.
+    Esta função faz a atualização do preço total de um pedido após a modificação
+    da quantidade de um livro em um certo pedido da seguinte forma:
+    - Obtém-se o preço do livro que está no ItemPedido
+    - Atualiza o preço total do Pedido adicionando o preço do livro multiplicado
+      pela diferença de quantidade pedida. (Note que se a diferença for 
+      negativa, ou seja foram retirados alguns livros do pedido, a "adição" de 
+      valor, na verdade, será uma subtração)
+
+
+Após entendermos o que cada trigger faz individualmente notamos que este 
+conjunto de ações serve para gerenciar o "carrinho de compras" de um cliente
+ao fazer pedidos online nesta loja, pois notamos que há o gerenciamento de 
+estoque, atualização de preços, verificação se o boleto já foi pago e outras 
+funcionalidades típicas do momento em que o cliente está preparando sua compra.
+
