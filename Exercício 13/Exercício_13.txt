@@ -13,6 +13,7 @@ Para a função F1 e Trigger T1:
       na loja, a tupla não será inserida.
     - Caso contrário o estoque da loja será atualizado e a tupla será inserida.
 
+
 Para a função F2:
 
     O trigger T2 é disparado antes de qualquer atualização na quantidade de 
@@ -40,7 +41,16 @@ Para a função F2:
   quantidade pretende-se modificar.
 
 
-
 Para a função F3:
+    
+    O trigger T3 é disparado depois de qualquer inserção de ItemPedido, para
+    cada linha de ItemPedido é executada a função F3.
+    Esta função faz a atualização do preço total de um pedido da seguinte forma:
+    - Obtém-se o preço do livro que está no ItemPedido
+    - Atualiza o preço total do Pedido adicionando o preço do livro multiplicado
+      pela quantidade pedida
+
 
 Para a função F4:
+
+    
