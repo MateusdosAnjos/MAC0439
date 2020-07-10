@@ -39,7 +39,8 @@ Para a função F2:
       disponível. Ex. O pedido tinha 2 livros 'A' e deseja-se comprar +3 livros 
       'A', ficando com 5 livros 'A', porém só existe mais 1 livro 'A' em 
       estoque, então o pedido será atualizado para 3 livros 'A'.
-    - Por fim o estoque do livro em questão será atualizado pela função.
+    - Por fim o estoque do livro em questão será atualizado pela função e a 
+    atualização da quantidade no ItemPedido prosseguirá.
 
   Obs: O termo 'livro em questão' refere-se ao livro cuja quantidade se pretende
   modificar e 'pedido em questão' refere-se ao pedido que contém o livro cuja
